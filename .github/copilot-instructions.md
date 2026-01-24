@@ -1,0 +1,42 @@
+# GitHub Copilot Instructions
+
+## プロジェクト概要
+- 目的: [日本語のREADMEはこちらから](README-ja.md)
+- 主な機能: Input the `API URL`, can send the transcribed text to the specified address automatically. / With the `AutoStart` feature turned on, recording will start the moment you visit the page or reload. (beta) / The `API URL` and `AutoStart` settings are stored and maintained in [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage).
+
+## 共通ルール
+- 会話は日本語で行う。
+- PR とコミットは Conventional Commits に従う。
+- PR タイトルとコミット本文の言語: PR タイトルは Conventional Commits 形式（英語推奨）。PR 本文は日本語。コミットは Conventional Commits 形式（description は日本語）。
+- 日本語と英数字の間には半角スペースを入れる。
+- 既存のプロジェクトルールがある場合はそれを優先する。
+
+## 技術スタック
+- 言語: Python
+- フレームワーク: FastAPI
+- パッケージマネージャー: pnpm 優先（ロックファイルに従う）。
+
+## コーディング規約
+- フォーマット: 既存設定（ESLint / Prettier / formatter）に従う。
+- 命名規則: 既存のコード規約に従う。
+- Lint / Format: 既存の Lint / Format 設定に従う。
+- コメント言語: 日本語
+- エラーメッセージ: 英語
+- TypeScript 使用時は strict 前提とし、`skipLibCheck` で回避しない。
+- 関数やインターフェースには docstring（JSDoc など）を記載する。
+
+## 開発コマンド
+```bash
+# README を確認してください
+```
+
+## テスト方針
+- 新機能や修正には適切なテストを追加する。
+
+## セキュリティ / 機密情報
+- 認証情報やトークンはコミットしない。
+- ログに機密情報を出力しない。
+
+## ドキュメント更新
+
+## リポジトリ固有

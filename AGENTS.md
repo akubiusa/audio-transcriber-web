@@ -25,3 +25,16 @@
 - ログに機密情報を出力しない。
 
 ## リポジトリ固有
+- **type**: Web Application
+**features:**
+  - Real-time microphone transcription
+  - Optional API URL posting
+  - localStorage settings persistence (API URL, AutoStart)
+  - Sentence alternatives with hover diff visualization
+  - Manual recording start/stop
+**browsers_supported:**
+  - Chrome 33+
+  - Edge 79+
+**deployment_options:**
+  - Local Python server
+  - Remote PHP API endpoint

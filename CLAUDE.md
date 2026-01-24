@@ -13,8 +13,20 @@
 - 前提・仮定・不確実性を明示し、仮定を事実のように扱わない。
 
 ## プロジェクト概要
-- 目的: [日本語のREADMEはこちらから](README-ja.md)
-- 主な機能: Input the `API URL`, can send the transcribed text to the specified address automatically. / With the `AutoStart` feature turned on, recording will start the moment you visit the page or reload. (beta) / The `API URL` and `AutoStart` settings are stored and maintained in [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage).
+Web-based audio transcription tool using browser's SpeechRecognition API to transcribe microphone input with optional API POST.
+
+### 技術スタック
+- **言語**: Python, JavaScript, HTML
+- **フレームワーク**: FastAPI, Uvicorn
+- **パッケージマネージャー**: pip
+- **主要な依存関係**:
+  - backend:
+    - fastapi==0.65.2
+    - uvicorn==0.12.3
+    - aiofiles==0.7.0
+  - frontend:
+    - axios
+    - jsdifflib
 
 ## 重要ルール
 - 会話言語: 日本語
@@ -43,25 +55,53 @@
 - TypeScript 使用時は `skipLibCheck` で回避しない。
 - 関数やインターフェースには docstring（JSDoc など）を記載する。
 
+### コーディング規約
+- **backend**: Python FastAPI web server
+- **frontend**: Browser SpeechRecognition API (Chrome 33+, Edge 79+)
+
 ## 相談ルール
 - Codex CLI: 実装レビュー、局所設計、整合性確認に使う。
 - Gemini CLI: 外部仕様や最新情報の確認に使う。
 - 他エージェントの指摘は黙殺せず、採用または理由を明記して不採用とする。
 
-## 開発コマンド
+### 開発コマンド
 ```bash
-# README を確認してください
+# install
+pip3 install -U -r requirements.txt
+
+# run
+python3 main.py --open-browser
+
+# server
+uvicorn application:app
+
 ```
 
-## アーキテクチャと主要ファイル
+### プロジェクト構造
+**ルートファイル:**
+- `main.py`
+- `api.php`
+- `requirements.txt`
+
+**主要ディレクトリ:**
+- `static/`
+- `images/`
+
+**重要ファイル:**
+- `main.py`
+- `static/manifest.json`
+- `api.php`
 
 ## 実装パターン
+- 既存のコードパターンに従う。
+- プロジェクト固有の実装ガイドラインがある場合はそれに従う。
 
 ## テスト
 - 方針: 変更内容に応じてテストを追加する。
 
 ## ドキュメント更新ルール
 - 更新タイミング: 実装確定後、同一コミットまたは追加コミットで更新する。
+- README、API ドキュメント、コメント等は常に最新状態を保つ。
 
 ## 作業チェックリスト
 
@@ -92,3 +132,16 @@
 6. PR 本文の崩れがないことを確認する。
 
 ## リポジトリ固有
+- **type**: Web Application
+**features:**
+  - Real-time microphone transcription
+  - Optional API URL posting
+  - localStorage settings persistence (API URL, AutoStart)
+  - Sentence alternatives with hover diff visualization
+  - Manual recording start/stop
+**browsers_supported:**
+  - Chrome 33+
+  - Edge 79+
+**deployment_options:**
+  - Local Python server
+  - Remote PHP API endpoint

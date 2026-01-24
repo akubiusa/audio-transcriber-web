@@ -15,8 +15,20 @@
 - 日本語と英数字の間には半角スペースを入れる。
 
 ## プロジェクト概要
-- 目的: [日本語のREADMEはこちらから](README-ja.md)
-- 主な機能: Input the `API URL`, can send the transcribed text to the specified address automatically. / With the `AutoStart` feature turned on, recording will start the moment you visit the page or reload. (beta) / The `API URL` and `AutoStart` settings are stored and maintained in [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage).
+Web-based audio transcription tool using browser's SpeechRecognition API to transcribe microphone input with optional API POST.
+
+### 技術スタック
+- **言語**: Python, JavaScript, HTML
+- **フレームワーク**: FastAPI, Uvicorn
+- **パッケージマネージャー**: pip
+- **主要な依存関係**:
+  - backend:
+    - fastapi==0.65.2
+    - uvicorn==0.12.3
+    - aiofiles==0.7.0
+  - frontend:
+    - axios
+    - jsdifflib
 
 ## コーディング規約
 - フォーマット: 既存設定（ESLint / Prettier / formatter）に従う。
@@ -24,9 +36,17 @@
 - コメント言語: 日本語
 - エラーメッセージ: 英語
 
-## 開発コマンド
+### 開発コマンド
 ```bash
-# README を確認してください
+# install
+pip3 install -U -r requirements.txt
+
+# run
+python3 main.py --open-browser
+
+# server
+uvicorn application:app
+
 ```
 
 ## 注意事項
@@ -35,3 +55,16 @@
 - 既存のプロジェクトルールがある場合はそれを優先する。
 
 ## リポジトリ固有
+- **type**: Web Application
+**features:**
+  - Real-time microphone transcription
+  - Optional API URL posting
+  - localStorage settings persistence (API URL, AutoStart)
+  - Sentence alternatives with hover diff visualization
+  - Manual recording start/stop
+**browsers_supported:**
+  - Chrome 33+
+  - Edge 79+
+**deployment_options:**
+  - Local Python server
+  - Remote PHP API endpoint

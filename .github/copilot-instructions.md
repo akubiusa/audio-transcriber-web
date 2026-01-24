@@ -1,8 +1,7 @@
 # GitHub Copilot Instructions
 
 ## プロジェクト概要
-- 目的: [日本語のREADMEはこちらから](README-ja.md)
-- 主な機能: Input the `API URL`, can send the transcribed text to the specified address automatically. / With the `AutoStart` feature turned on, recording will start the moment you visit the page or reload. (beta) / The `API URL` and `AutoStart` settings are stored and maintained in [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage).
+Web-based audio transcription tool using browser's SpeechRecognition API to transcribe microphone input with optional API POST.
 
 ## 共通ルール
 - 会話は日本語で行う。
@@ -12,9 +11,8 @@
 - 既存のプロジェクトルールがある場合はそれを優先する。
 
 ## 技術スタック
-- 言語: Python
-- フレームワーク: FastAPI
-- パッケージマネージャー: pnpm 優先（ロックファイルに従う）。
+- 言語: Python, JavaScript, HTML
+- パッケージマネージャー: pip
 
 ## コーディング規約
 - フォーマット: 既存設定（ESLint / Prettier / formatter）に従う。
@@ -25,9 +23,17 @@
 - TypeScript 使用時は strict 前提とし、`skipLibCheck` で回避しない。
 - 関数やインターフェースには docstring（JSDoc など）を記載する。
 
-## 開発コマンド
+### 開発コマンド
 ```bash
-# README を確認してください
+# install
+pip3 install -U -r requirements.txt
+
+# run
+python3 main.py --open-browser
+
+# server
+uvicorn application:app
+
 ```
 
 ## テスト方針
@@ -38,5 +44,20 @@
 - ログに機密情報を出力しない。
 
 ## ドキュメント更新
+- 実装確定後、同一コミットまたは追加コミットで更新する。
+- README、API ドキュメント、コメント等は常に最新状態を保つ。
 
 ## リポジトリ固有
+- **type**: Web Application
+**features:**
+  - Real-time microphone transcription
+  - Optional API URL posting
+  - localStorage settings persistence (API URL, AutoStart)
+  - Sentence alternatives with hover diff visualization
+  - Manual recording start/stop
+**browsers_supported:**
+  - Chrome 33+
+  - Edge 79+
+**deployment_options:**
+  - Local Python server
+  - Remote PHP API endpoint

@@ -10,12 +10,15 @@ adding `npm`/`pytest`/`eslint` commands that do not exist here.
 ## Review priorities
 
 - **Backend parity**: `main.py` (`POST /api`) and `api.php` must accept the same request
-  body (`startTime`, `timeStamp`, `transcript`, `full`) and produce the same output
-  (`data/<startTime>.log` with tab-separated `<timeStamp>s\t<transcript>` lines, and
-  `data/<startTime>.json`). Flag changes to one backend that are not mirrored in the other.
-- **File-writing safety**: both backends write user-derived data to `data/`. Watch for
-  path traversal or injection via `startTime`/timestamps used in filenames, and unchecked
-  file writes.
+  body (`startTime`, `timeStamp`, `transcript`, `full`) and produce the same output — a
+  filename derived from `startTime` formatted as `YYYY-MM-DD HH-MM-SS`, written as
+  `data/<that timestamp>.log` (tab-separated `<timeStamp>s\t<transcript>` lines) and
+  `data/<that timestamp>.json`. Flag changes to one backend that are not mirrored in the other.
+- **File-writing safety**: both backends write user-derived data to `data/`. The filename
+  currently comes only from `startTime` run through `datetime`/`date` formatting, which
+  constrains it; flag any change that puts raw request values (e.g. `startTime`,
+  `transcript`) into a path without that formatting, or otherwise enables path traversal or
+  unchecked file writes.
 - **Input validation**: request fields come from the browser. Flag missing validation of
   `startTime`/`full` before they are used (e.g. `date()`/`datetime.fromtimestamp`, array
   iteration).

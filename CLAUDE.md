@@ -34,12 +34,14 @@ Browser support: Chrome 33+ / Edge 79+ (Web Speech API required).
 - `static/script.js` — all recognition logic: starts `SpeechRecognition`, renders
   interim/final results, diffs alternatives, and POSTs finalized transcripts via axios.
 - `static/style.css`, `static/manifest.json` — styling and PWA manifest.
-- `static/axios.min.js`, `static/diff.js` (jsdifflib), `static/screenfull.min.js` —
-  vendored third-party libraries, committed as-is. Do not hand-edit these.
-- `main.py` — FastAPI backend. `POST /api` writes `data/<startTime>.log` (tab-separated
-  `<timeStamp>s\t<transcript>` lines) and `data/<startTime>.json` (raw `full` array).
+- `static/axios.min.js`, `static/diff.js` (kpdecker's `diff` / jsdiff), `static/screenfull.min.js`
+  — vendored third-party libraries, committed as-is. Do not hand-edit these.
+- `main.py` — FastAPI backend. `POST /api` derives a filename from `startTime`, formatted
+  as `YYYY-MM-DD HH-MM-SS` (via `datetime.fromtimestamp(...).strftime(...)`), and writes
+  `data/<that timestamp>.log` (tab-separated `<timeStamp>s\t<transcript>` lines) and
+  `data/<that timestamp>.json` (raw `full` array).
 - `api.php` — PHP backend implementing the same request/response contract and file
-  output format as `main.py`.
+  output format as `main.py` (same `date("Y-m-d H-i-s", startTime)` filename derivation).
 - `data/` — runtime output, gitignored. Not committed.
 
 ## Conventions
@@ -59,5 +61,6 @@ Browser support: Chrome 33+ / Edge 79+ (Web Speech API required).
 ## Verification
 
 No automated tests exist. Verify changes manually: run `python3 main.py`, open the page,
-grant microphone access, record speech, and confirm results render and that
-`data/<startTime>.{log,json}` are written with the expected content.
+grant microphone access, record speech, and confirm results render and that a
+`data/<YYYY-MM-DD HH-MM-SS>.{log,json}` pair (named from the session start time) is
+written with the expected content.

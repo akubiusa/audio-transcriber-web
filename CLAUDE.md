@@ -5,15 +5,18 @@
 Browser-based speech-to-text transcriber. The static frontend uses the Web Speech
 API (`webkitSpeechRecognition`) to transcribe microphone audio in real time, shows
 the results (with recognition alternatives on hover), and can POST each transcript to
-a configurable `API URL`. A small backend receives those POSTs and appends them to
-per-session `.log` and `.json` files under `data/`.
+a configurable `API URL`. A small backend receives those POSTs and writes them to
+per-session `.log` and `.json` files under `data/` — each POST sends the full transcript
+so far, and the backend overwrites that session's files with it (it does not append).
 
 The frontend can run standalone from GitHub Pages; the backend is optional and only
 needed if you want transcripts saved to disk.
 
 ## Running
 
-There is no build step, package manager, test suite, or linter in this repository.
+There is no build step, JS/frontend package manager, test suite, or linter in this
+repository. Python dependencies are the one exception: they are managed with `pip` +
+`requirements.txt` (see the Python backend below).
 
 - Frontend only: open `static/index.html` (or the GitHub Pages URL). No server needed.
 - Python backend:

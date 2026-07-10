@@ -30,6 +30,7 @@ adding `npm`/`pytest`/`eslint` commands that do not exist here.
 
 ## Do not flag
 
-- Absence of a package manager, lockfile, test suite, or CI config — this is intentional.
+- Absence of a JS/frontend package manager, JS lockfile, test suite, or CI config — this
+  is intentional. (Python deps are the exception: they use `pip` + `requirements.txt`.)
 - Global/`var`-style vanilla JS and CDN-loaded jQuery in `static/` — consistent with the
   existing codebase; do not push toward a framework or module bundler.
